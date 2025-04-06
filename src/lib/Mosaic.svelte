@@ -1,25 +1,34 @@
 <script lang="ts">
+	import Mosaic from './Mosaic.svelte';
 	import Node from '$lib/Node.svelte';
 	import { type Tree, isTree } from '$lib/tree';
 
-	export let tree: Tree;
+	interface Props {
+		tree: Tree;
+	}
+
+	let { tree }: Props = $props();
 </script>
 
 <Node direction={tree.direction} betaSize={tree.betaSize} alphaSize={tree.alphaSize}>
-	<div slot="alpha">
-		{#if isTree(tree.alpha)}
-			<svelte:self tree={tree.alpha} />
-		{:else}
-			<svelte:component this={tree.alpha.component} {...tree.alpha.props} />
-		{/if}
-	</div>
-	<div slot="beta">
-		{#if isTree(tree.beta)}
-			<svelte:self tree={tree.beta} />
-		{:else}
-			<svelte:component this={tree.beta.component} {...tree.beta.props} />
-		{/if}
-	</div>
+	{#snippet alpha()}
+		<div >
+			{#if isTree(tree.alpha)}
+				<Mosaic tree={tree.alpha} />
+			{:else}
+				<tree.alpha.component {...tree.alpha.props} />
+			{/if}
+		</div>
+	{/snippet}
+	{#snippet beta()}
+		<div >
+			{#if isTree(tree.beta)}
+				<Mosaic tree={tree.beta} />
+			{:else}
+				<tree.beta.component {...tree.beta.props} />
+			{/if}
+		</div>
+	{/snippet}
 </Node>
 
 <style>

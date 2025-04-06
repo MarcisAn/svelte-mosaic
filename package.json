@@ -1,7 +1,7 @@
 {
 	"name": "svelte-mosaic",
 	"description": "svelte's tiling window manager",
-	"version": "0.0.2",
+	"version": "1.0.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -21,6 +21,18 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
+		},
+		"./tree": {
+			"types": "./dist/tree.d.ts",
+			"svelte": "./dist/tree.js"
+		},
+		"./Mosaic.svelte": {
+			"types": "./dist/Mosaic.svelte.d.ts",
+			"svelte": "./dist/Mosaic.svelte"
+		},
+		"./Node.svelte": {
+			"types": "./dist/Node.svelte.d.ts",
+			"svelte": "./dist/Node.svelte"
 		}
 	},
 	"files": [
@@ -30,13 +42,13 @@
 	],
 	"author": {
 		"name": "Tristan F.",
-		"email": "leodog896@gmail.com"
+		"email": "pub.tristanf@gmail.com"
 	},
-	"repository": "github:LeoDog896/svelte-mosaic",
-	"homepage": "https://leodog896.github.io/svelte-mosaic",
+	"repository": "github:tristan-f-r/svelte-mosaic",
+	"homepage": "https://tristan-f-r.github.io/svelte-mosaic",
 	"bugs": {
-		"url": "https://github.com/LeoDog896/svelte-mosaic/issues",
-		"email": "leodog896@gmail.com"
+		"url": "https://github.com/tristan-f-r/svelte-mosaic/issues",
+		"email": "pub.tristanf@gmail.com"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -44,23 +56,23 @@
 		"@fontsource-variable/jetbrains-mono": "^5.0.9",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-static": "^3.0.0",
-		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/package": "^2.2.0",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@sveltejs/kit": "^2.5.27",
+		"@sveltejs/package": "^2.3.7",
+		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte": "^2.30.0",
-		"prettier": "^2.8.0",
-		"prettier-plugin-svelte": "^2.10.1",
+		"eslint-plugin-svelte": "^2.45.1",
+		"prettier": "^3.1.0",
+		"prettier-plugin-svelte": "^3.2.6",
 		"publint": "^0.1.16",
-		"svelte": "^4.1.1",
-		"svelte-check": "^3.4.3",
+		"svelte": "^5.0.0",
+		"svelte-check": "^4.0.0",
 		"svelte-icons": "^2.1.0",
 		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
-		"vite": "^5.0.0"
+		"typescript": "^5.5.0",
+		"vite": "^5.4.4"
 	},
 	"peerDependencies": {
 		"svelte": ">=4.0.0"

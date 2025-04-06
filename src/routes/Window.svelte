@@ -2,7 +2,11 @@
 	import MdAddCircle from 'svelte-icons/md/MdAddCircle.svelte';
 	import MdRemoveCircle from 'svelte-icons/md/MdRemoveCircle.svelte';
 
-	export let number = 1;
+	interface Props {
+		number?: number;
+	}
+
+	let { number = 1 }: Props = $props();
 </script>
 
 <div class="nav">
@@ -13,7 +17,7 @@
 <div class="container">
 	<h1>W<span class="i">i</span>ndow {number}</h1>
 	{#each number.toString(2).split('').reverse() as bit}
-		<div class="bit" class:active={bit == '1'} />
+		<div class="bit" class:active={bit == '1'}></div>
 	{/each}
 </div>
 

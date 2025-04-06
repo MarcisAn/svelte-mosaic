@@ -1,16 +1,23 @@
 <script lang="ts">
-	/** The orientation of the element */
-	export let direction: 'horizontal' | 'vertical';
+	import type { Snippet } from "svelte";
 
-	export let alphaSize: [min?: number, max?: number] = [undefined, undefined];
-	export let betaSize: [min?: number, max?: number] = [undefined, undefined];
+	interface Props {
+		/** The orientation of the element */
+		direction: 'horizontal' | 'vertical';
+		alphaSize?: [min?: number, max?: number];
+		betaSize?: [min?: number, max?: number];
+		alpha: Snippet,
+		beta: Snippet
+	}
 
-	let wrapper: HTMLDivElement;
-	let alpha: HTMLDivElement;
-	let handle: HTMLDivElement;
+	const { direction, alphaSize = [undefined, undefined], betaSize = [undefined, undefined], alpha, beta }: Props = $props()
 
-	let isDragging = false;
-	let width: number | undefined = undefined;
+	let wrapper = $state<HTMLDivElement>();
+	let alphaDiv = $state<HTMLDivElement>();
+	let handle = $state<HTMLDivElement>();
+
+	let isDragging = $state(false);
+	let width = $state<number | undefined>(undefined);
 </script>
 
 <svelte:window
@@ -28,6 +35,7 @@
 	on:mousemove={(event) => {
 		const { clientX, clientY } = event;
 		if (isDragging) {
+			if (!wrapper || !alphaDiv) return;
 			event.preventDefault();
 
 			// Get offset
@@ -51,20 +59,20 @@
 			);
 
 			if (direction === 'horizontal') {
-				alpha.style.width = size + 'px';
+				alphaDiv.style.width = size + 'px';
 			} else {
-				alpha.style.height = size + 'px';
+				alphaDiv.style.height = size + 'px';
 			}
 
-			alpha.style.flexGrow = '0';
-			alpha.style.flex = 'none';
+			alphaDiv.style.flexGrow = '0';
+			alphaDiv.style.flex = 'none';
 		}
 	}}
 />
 
 <div bind:this={wrapper} class="flex {direction}">
-	<div bind:this={alpha} class="child">
-		<slot name="alpha" />
+	<div bind:this={alphaDiv} class="child">
+		{@render alpha?.()}
 	</div>
 	<div
 		bind:this={handle}
@@ -75,9 +83,9 @@
 		aria-orientation={direction}
 		aria-valuenow={width}
 		tabindex="-1"
-	/>
+	></div>
 	<div class="child">
-		<slot name="beta" />
+		{@render beta?.()}
 	</div>
 </div>
 

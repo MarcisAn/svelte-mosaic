@@ -1,15 +1,15 @@
-import type { ComponentProps, ComponentType, SvelteComponent } from 'svelte';
+import type { Component, ComponentProps, SvelteComponent } from 'svelte';
 
 const treeMarker = Symbol('isTree');
 
-type Component<T extends SvelteComponent = SvelteComponent> = {
+type IComponent<T extends SvelteComponent = SvelteComponent> = {
 	props: ComponentProps<T>;
-	component: ComponentType<T>;
+	component: Component<ComponentProps<T>>;
 };
 
 export interface Tree {
-	alpha: Tree | Component;
-	beta: Tree | Component;
+	alpha: Tree | IComponent;
+	beta: Tree | IComponent;
 	direction: 'horizontal' | 'vertical';
 	alphaSize?: [min?: number, max?: number];
 	betaSize?: [min?: number, max?: number];
